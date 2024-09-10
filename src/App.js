@@ -17,6 +17,8 @@ function App() {
       {/* <AllRoutes /> */}
 
       <LogSign />
+      <Navbar />
+      <Sidebar />
     </div>
   );
 }

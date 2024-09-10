@@ -7,7 +7,7 @@ function LogSign(){
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'></link>
 
             <div className="body">
-                <div className="header">
+                {/* <div className="header">
                     <nav className="navbar">
                         <a href="#">Home</a>
                         <a href="#">About</a>
@@ -18,7 +18,7 @@ function LogSign(){
                         <input type="text" placeholder="Search..." />
                         <button type="submit"><i class='bx bx-search'></i></button>
                     </form>
-                </div>
+                </div> */}
 
                 <div className="background"></div>
 
@@ -29,7 +29,7 @@ function LogSign(){
                         <div className="text-sci">
                             <h2>Welcome...!<br/><span>To Our New Website...</span></h2>
 
-                            <p>The future belongs to those who believe in the beauty of their dreams: This quote is by Eleanor Roosevelt. </p>
+                            <p>The future belongs to those who believe in the beauty of their dreams..! This quote is by Pradip Jagdhane. </p>
                             
                             <div className="social-icons">
                                 <a href="#"><i class='bx bxl-linkedin' ></i></a>
@@ -64,7 +64,7 @@ function LogSign(){
                                 <button type="submit>" className="btn">Sign In</button>
 
                                 <div className="login-register">
-                                    <p>Don't have account? <a  href="#" className="register-link">Sign Up</a></p>
+                                    <p>Don't have an account? <a  href="#" className="register-link">Sign Up</a></p>
                                 </div>
                                 
                             </form>
@@ -99,7 +99,7 @@ function LogSign(){
                                 <button type="submit>" className="btn">Sign Up</button>
 
                                 <div className="login-register">
-                                    <p>Already have account? <a  href="#" className="login-link">Sign In</a></p>
+                                    <p>Already have an account? <a  href="#" className="login-link">Sign In</a></p>
                                 </div>
                                 
                             </form>

@@ -303,3 +303,52 @@
 .login-register p a:hover{
     text-decoration: underline;
 }
+
+
+@media(max-width:600px){
+    .container{
+     overflow-y: scroll;
+     display: block;
+     top: 48%;
+     width: 94%;
+     height: 94%;
+     }
+ 
+     .container .content{
+     position: relative;
+     left: 2px;
+     width: 98%;
+     height: 98%;
+     padding: 3px;
+     }
+ 
+     .container .logreg-box{
+         position: relative;
+         width: 95%;
+         right: -10px;
+         height: 98%;
+     }
+ 
+     .content .logo {
+         padding: 40px 25px;
+     }
+ 
+     
+     .text-sci h2 {
+     padding: 50px 40px;
+     line-height: 2; 
+     }
+ 
+     .text-sci p {
+         padding: 94px 31px;
+         font-size: 20px;
+     }
+ 
+     .social-icons a i {
+         padding: 10px 10px;
+     }
+ 
+     .social-icons{
+         padding: 18px 83px;
+     }
+ }
