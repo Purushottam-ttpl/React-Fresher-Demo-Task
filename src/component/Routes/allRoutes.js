@@ -1,13 +1,25 @@
 import { Route, Routes } from "react-router-dom"
-import { routes } from "./Constant"
+import { Private_routes, Public_routes } from "./Constant"
 
 const AllRoutes =()=>{
     return(
         <>
+
             <Routes>
-                {routes.map((route, index)=>{
-                    return <Route key={index} path={route.path} element={route.component} />
+                {Public_routes.map((route, index)=>{
+                    const {path, component} = route;
+
+                    return <Route key={index} path={path} element={component} />
+                    
                 })}
+
+                {Private_routes.map((route, index)=>{
+                       const {path, component} = route;
+                       
+                    return <Route key={index} path={path} element={component} />
+                    
+                })}
+
             </Routes>
         </>
     )

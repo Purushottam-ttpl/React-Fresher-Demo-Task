@@ -13,12 +13,14 @@ function App() {
 
   return (
     <div>
-  
-      {/* <AllRoutes /> */}
 
-      <LogSign />
-      <Navbar />
-      <Sidebar />
+      {/* <Navbar /> */}
+  
+      <AllRoutes />
+
+      {/* <LogSign />
+      
+      <Sidebar /> */}
     </div>
   );
 }

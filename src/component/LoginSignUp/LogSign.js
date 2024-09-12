@@ -1,18 +1,85 @@
-import React from "react";
+import React, { useState } from "react";
 import "./LogSign.css";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import "boxicons";
+
 
 function LogSign(){
+
+    const navigate = useNavigate();
+
+    const [email, setEmail]=useState("");
+    const [password, setPassword]=useState("");
+    const [errors, setErrors]=useState({});
+
+    function validateEmail(email){
+        const emailRegx = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+        return emailRegx.test(email);
+    }
+    // console.log("validate email---->",email);
+
+
+    function validatePassword(password){
+        const passwordRegx = /^(?=.*[A-Z])(?=.*[!@#$%^&*()_+{}[\]:;<>,.?~\\/-])[A-Za-z\d!@#$%^&*()_+{}[\]:;<>,.?~\\/-]{8,}$/;
+        return passwordRegx.test(password);
+    }
+    // console.log("validate password---->",password);
+
+
+
+    function validateSubmitForm(e){
+       
+
+        const validateErrors={};
+
+        if(!email){
+            validateErrors.email = "Email is required...!";
+        }
+        else if(!validateEmail(email)){
+            validateErrors.email = "Invalid email format...!";
+        }
+
+
+        if(!password){
+            validateErrors.password = "Password is mandatory...!";
+        }
+        else if(!validatePassword(password)){
+            validateErrors.password = "Password must be at least 8 characters, contain one uppercase letter, and one special character...!"
+        }
+
+
+
+        if(Object.keys(validateErrors).length === 0){
+            navigate("/home"); 
+            alert("no errors");
+        }
+        else{
+            setErrors(validateErrors);
+        }
+        console.log("validate errors---->",validateErrors);
+        
+    }
+    
+    // console.log("validate errors---->",errors);
+
+    function handleClick(e){
+        e.preventDefault();
+        validateSubmitForm();
+    }
+
+    
+
     return(
         <>
-        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'></link>
+        <link to='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'></link>
 
             <div className="body">
                 {/* <div className="header">
                     <nav className="navbar">
-                        <a href="#">Home</a>
-                        <a href="#">About</a>
-                        <a href="#">Contact</a>
-                        <a href="#">Services</a>
+                        <a to="#">Home</a>
+                        <a to="#">About</a>
+                        <a to="#">Contact</a>
+                        <a to="#">Services</a>
                     </nav>
                     <form action="#" className="search-bar">
                         <input type="text" placeholder="Search..." />
@@ -32,39 +99,41 @@ function LogSign(){
                             <p>The future belongs to those who believe in the beauty of their dreams..! This quote is by Pradip Jagdhane. </p>
                             
                             <div className="social-icons">
-                                <a href="#"><i class='bx bxl-linkedin' ></i></a>
-                                <a href="#"><i class='bx bxl-instagram' ></i></a>
-                                <a href="#"><i class='bx bxl-facebook' ></i></a>
-                                <a href="#"><i class='bx bxl-twitter' ></i></a>
+                                <Link to="#" className="link"><i class='bx bxl-linkedin' ></i></Link>
+                                <Link to="#" className="link"><i class='bx bxl-instagram' ></i></Link>
+                                <Link to="#" className="link"><i class='bx bxl-facebook' ></i></Link>
+                                <Link to="#" className="link"><i class='bx bxl-twitter' ></i></Link>
                             </div>
                         </div>
                     </div>
 
                     <div className="logreg-box">
                         <div className="form-box login">
-                            <form action="#">
+                            <form>
                                 <h2>Sign In</h2>
 
                                 <div className="input-box">
                                     <span className="icon"><i class='bx bxs-envelope' ></i></span>
-                                    <input type="email" required />
+                                    <input type="text" value={email} onChange={(e)=>setEmail(e.target.value)} />
                                     <label>Email</label>
+                                    {errors.email && <span className="error" style={{color:"red"}}>{errors.email}</span>}
                                 </div>
                                 <div className="input-box">
                                     <span className="icon"><i class='bx bxs-lock-alt' ></i></span>
-                                    <input type="password" required />
+                                    <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} />
                                     <label>Password</label>
+                                    {errors.password && (<span className="error" style={{color:"red"}}>{errors.password}</span>)}
                                 </div>
 
                                 <div className="remember-forgot">
                                     <label><input type="checkbox" />Remember me</label>
-                                    <a href="#">Forgot Password?</a>
+                                    <Link to="#" className="link">Forgot Password?</Link>
                                 </div>
 
-                                <button type="submit>" className="btn">Sign In</button>
+                                <button type="submit" className="btn" onClick={handleClick}>Sign In</button>
 
                                 <div className="login-register">
-                                    <p>Don't have an account? <a  href="#" className="register-link">Sign Up</a></p>
+                                    <p>Don't have an account? <Link to="#" className="register-link link">Sign Up</Link></p>
                                 </div>
                                 
                             </form>
@@ -99,7 +168,7 @@ function LogSign(){
                                 <button type="submit>" className="btn">Sign Up</button>
 
                                 <div className="login-register">
-                                    <p>Already have an account? <a  href="#" className="login-link">Sign In</a></p>
+                                    <p>Already have an account? <Link  to="#" className="login-link link">Sign In</Link></p>
                                 </div>
                                 
                             </form>
