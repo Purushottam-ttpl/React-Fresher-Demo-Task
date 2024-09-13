@@ -1,14 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./LogSign.css";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { login } from "../folderRedux/sliceNew/newSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 
 
 function LogSign(){
+    const token=localStorage.getItem("token");
+    console.log("login page token",token);
 
-  
+    useEffect(()=>{
+        if(token){
+           navigate("/home");
+        }
+        // else{
+        //     navigate("/home");
+        // }
+
+        console.log("useEffect rendered--->")
+
+    },[]);
+
+
+    // const token = useSelector((state)=>state.auth.accessToken);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -32,7 +47,7 @@ function LogSign(){
 
 
     function validateSubmitForm(e){
-       
+       console.log("validation of form executed---->",email)
 
         const validateErrors={};
 
@@ -55,6 +70,8 @@ function LogSign(){
 
         if(Object.keys(validateErrors).length === 0){
             // navigate("/home"); 
+
+            dispatch(login("123"));
             alert("no errors");
         }
         else{
@@ -70,9 +87,9 @@ function LogSign(){
 
         e.preventDefault();
         validateSubmitForm();
+        console.log("handleclick function executed---->",e)
+        // const accessToken = 'eyJhbGciOi';
         
-        const accessToken = 'my-access-token';
-        dispatch(login(accessToken));
         
     }
 

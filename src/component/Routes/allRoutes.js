@@ -2,7 +2,8 @@ import { Navigate, Outlet, Route, Routes, useLocation, useNavigate } from "react
 import { Private_routes, Public_routes } from "./Constant"
 import Navbar from "../Header/Navbar";
 import LogSign from "../LoginSignUp/LogSign";
-import ProtectedRoute from "./protectedRoute";
+import { AuthProtected, FullPageRoute } from "./protectedRoute";
+
 
 
 const AllRoutes =()=>{
@@ -20,21 +21,20 @@ const AllRoutes =()=>{
 
     return(
         <>
-            {location.pathname === "/" ? <LogSign /> : <Navbar />}
+            {/* {location.pathname === "/" ? <LogSign /> : <Navbar />} */}
 
 
             <Routes>
                 {Public_routes.map((route, index)=>{
                     const {path, component} = route;
 
-                    return <Route key={index} path={path} element={component} />
-                    
+                    return <Route key={index} path={path} element={<FullPageRoute element={component} />} />
                 })}
 
                 {Private_routes.map((route, index)=>{
                        const {path, component} = route;
 
-                    return <Route key={index} path={path} element={<ProtectedRoute element={component} />} />
+                    return <Route key={index} path={path} element={<AuthProtected element={component} />} />
                     
                 })}
 
