@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import "./LogSign.css";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import "boxicons";
+import { login } from "../folderRedux/sliceNew/newSlice";
+import { useDispatch } from "react-redux";
+
 
 
 function LogSign(){
 
+  
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const [email, setEmail]=useState("");
-    const [password, setPassword]=useState("");
+    const [email, setEmail]=useState("rocky.323@gmail.com");
+    const [password, setPassword]=useState("Rockyyy@323");
     const [errors, setErrors]=useState({});
 
     function validateEmail(email){
@@ -50,7 +54,7 @@ function LogSign(){
 
 
         if(Object.keys(validateErrors).length === 0){
-            navigate("/home"); 
+            // navigate("/home"); 
             alert("no errors");
         }
         else{
@@ -63,15 +67,20 @@ function LogSign(){
     // console.log("validate errors---->",errors);
 
     function handleClick(e){
+
         e.preventDefault();
         validateSubmitForm();
+        
+        const accessToken = 'my-access-token';
+        dispatch(login(accessToken));
+        
     }
 
     
 
     return(
         <>
-        <link to='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'></link>
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'></link>
 
             <div className="body">
                 {/* <div className="header">
@@ -91,7 +100,7 @@ function LogSign(){
 
                 <div className="container">
                     <div className="content">
-                        <h2 className="logo"><i class='bx bxl-firebase'></i>Assignment</h2>
+                        <h2 className="logo"><i className='bx bxl-firebase'></i>Assignment</h2>
 
                         <div className="text-sci">
                             <h2>Welcome...!<br/><span>To Our New Website...</span></h2>
@@ -99,10 +108,10 @@ function LogSign(){
                             <p>The future belongs to those who believe in the beauty of their dreams..! This quote is by Pradip Jagdhane. </p>
                             
                             <div className="social-icons">
-                                <Link to="#" className="link"><i class='bx bxl-linkedin' ></i></Link>
-                                <Link to="#" className="link"><i class='bx bxl-instagram' ></i></Link>
-                                <Link to="#" className="link"><i class='bx bxl-facebook' ></i></Link>
-                                <Link to="#" className="link"><i class='bx bxl-twitter' ></i></Link>
+                                <Link to="#" className="link"><i className='bx bxl-linkedin' ></i></Link>
+                                <Link to="#" className="link"><i className='bx bxl-instagram' ></i></Link>
+                                <Link to="#" className="link"><i className='bx bxl-facebook' ></i></Link>
+                                <Link to="#" className="link"><i className='bx bxl-twitter' ></i></Link>
                             </div>
                         </div>
                     </div>
@@ -144,18 +153,18 @@ function LogSign(){
                                 <h2>Sign Up</h2>
 
                                 <div className="input-box">
-                                    <span className="icon"><i class='bx bxs-user' ></i></span>
+                                    <span className="icon"><i className='bx bxs-user' ></i></span>
                                     <input type="text" required />
                                     <label>Name</label>
                                 </div>
 
                                 <div className="input-box">
-                                    <span className="icon"><i class='bx bxs-envelope' ></i></span>
+                                    <span className="icon"><i className='bx bxs-envelope' ></i></span>
                                     <input type="email" required />
                                     <label>Email</label>
                                 </div>
                                 <div className="input-box">
-                                    <span className="icon"><i class='bx bxs-lock-alt' ></i></span>
+                                    <span className="icon"><i className='bx bxs-lock-alt' ></i></span>
                                     <input type="password" required />
                                     <label>Password</label>
                                 </div>

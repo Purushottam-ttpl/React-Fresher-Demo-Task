@@ -10,11 +10,12 @@ const Home =()=>{
         console.log("button clicked---->",e);
     };
     return(
-        <>
-            <Navbar />
-            <h1>Home Page</h1>
+        <div>
+
+            {/* <Navbar /> */}
+            <h1 style={{color :"green"}}>Home Page</h1>
             <button onClick={handleLogout}>Logout</button>
-        </>
+        </div>
     );
 }
 

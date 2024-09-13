@@ -4,7 +4,7 @@ import Navbar from "../Header/Navbar";
 const Contact =()=>{
     return(
         <>
-            <Navbar />
+            {/* <Navbar /> */}
             <h1>Contact Page</h1>
         </>
     );

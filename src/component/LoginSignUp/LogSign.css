@@ -386,7 +386,7 @@
 } */
 
 .body{
-    background: #020410;
+    /* background: #020410; */
 }
 
 .header{
@@ -614,16 +614,16 @@
     position: absolute;
     top: 50%;
     left: 0;
-    transform: translateY(-50%);
+    transform: translateY(-100%);
     font-size: 16px;
     font-weight: 500;
     pointer-events: none;
-    transition: .5s ease;
+    transition: .4s ease;
 }
 
 .input-box input:focus~label,
 .input-box input:valid label{
-    top: -5px;
+    top: 5px;
 }
 
 .input-box .icon{

@@ -6,10 +6,11 @@
 }
 
 .body{
-    background: url();
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
+    background: url(../images/image.jpg)no-repeat;
+    height: 200px;
+    /* background-size: cover;
+    background-position: center; */
+    /* height: 100vh; */
 }
 
 header{
@@ -19,11 +20,11 @@ header{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: fixed;
+    /* position: fixed; */
     z-index: 99;
     box-shadow: 0 0 10px #000;
-    /* background: rgba(0, 0, 0, 0.5); */
-    background: transparent;
+    background: rgba(0, 0, 0, 0.5);
+    /* background: transparent; */
 
 }
 
@@ -73,11 +74,12 @@ header .search-box{
     top: 0;
     right: 0;
     transform: scale(0.9);
-    background: green;
+    background: #c4103d;
 
 }
 
 header ul{
+    align-items: center;
     display: flex;
     flex: 2;
     justify-content: space-evenly;
@@ -87,7 +89,7 @@ header ul li{
     list-style: none;
 }
 
-header ul li a{
+header ul li .Link{
     text-decoration: none;
     color: white;
     font-weight: 600;
@@ -95,7 +97,20 @@ header ul li a{
     padding: 10px 15px;
 }
 
-header ul li a:hover{
+header ul button{
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 30px;
+    /* position: absolute; */
+    border: none;
+    /* top: 0; */
+    right: 2px;
+    transform: scale(0.9);
+    background: #c4103d;
+}
+
+header ul li .Link:hover{
     border-bottom: 2px solid cadetblue;
     transition: right 0.5s linear;
 }
@@ -149,7 +164,7 @@ header .menu{
         width: 100%;
     }
 
-    header ul li a:hover{
+    header ul li .Link:hover{
         border-bottom: 2px solid cadetblue;
         transition: right 0.5s linear;
     }
