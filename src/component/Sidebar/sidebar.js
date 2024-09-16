@@ -37,7 +37,7 @@ import { useEffect } from "react";
         <div className="body">
             <nav className="sidebar">
         <div className="logo-menu">
-            <h2 className="logo">Assignment</h2>
+            <h2 className="logo">Dashboard</h2>
             <i className='bx bx-menu toggle-btn'  ></i>
         </div>
         <ul className="list">

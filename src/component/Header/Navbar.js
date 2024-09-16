@@ -11,11 +11,15 @@ const Navbar =()=>{
   
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const userRole = localStorage.getItem("UserType");
+    console.log("role from navbar--->",userRole);
 
     const handleLogout=(e)=>{
         dispatch(logout());
 
-        // navigate("/");
+        navigate("/login");
+
+        localStorage.removeItem("UserType");
        
         console.log("button clicked---->",e);
     };
@@ -38,13 +42,26 @@ const Navbar =()=>{
         </form>
         </div>
         <ul>
+            {userRole === "Admin" && (
+                <>
+                 <Link to="/home" className="Link">Home</Link>
+                 <Link to="/contact" className="Link">Contact</Link>
+                </>
+            )}
 
-        {Private_routes.map((route, index)=>{
+            {userRole === "Patient" && (
+                <>
+                 <Link to="/about" className="Link">About</Link>
+                
+                </>
+            )}
+
+        {/* {Private_routes.map((route, index)=>{
             const {path, name} = route;
                 return  <li key={index}>
                 <Link to={path} className="Link">{name}</Link>
                 </li>
-        })}
+        })} */}
 
         <li>
             <Link to="#" className="Link"><i className="fab fa-facebook"></i></Link>

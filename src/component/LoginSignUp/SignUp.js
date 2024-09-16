@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from "react";
-import "./LogSign.css";
+import "./SignUp.css";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { login } from "../folderRedux/sliceNew/newSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
-// import SignUp from "./SignUp";
 
 
 
-
-function LogSign(){
+function SignUp(){
     // const token = useSelector((state)=>state.auth.accessToken);
 
     // const token=localStorage.getItem("token");
@@ -78,12 +74,10 @@ function LogSign(){
             // navigate("/home"); 
 
             dispatch(login("123"));
-            // alert("no errors");
-            toast.success("Login Successful...!")
+            alert("no errors");
         }
         else{
             setErrors(validateErrors);
-            toast.error("Login Failed...!")
         }
         console.log("validate errors---->",validateErrors);
         
@@ -101,8 +95,14 @@ function LogSign(){
         
     }
 
+    const [role, setRole]= useState();
     
+    function handleSubmit(e){
+        e.preventDefault();
+         localStorage.setItem("UserType",role);
 
+    }
+    console.log("user role--->",role)
     return(
         <>
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'></link>
@@ -140,8 +140,9 @@ function LogSign(){
                             </div>
                         </div>
                     </div>
+
                     <div className="logreg-box">
-                        <div className="form-box login">
+                        {/* <div className="form-box login">
                             <form>
                                 <h2>Sign In</h2>
 
@@ -170,11 +171,17 @@ function LogSign(){
                                 </div>
                                 
                             </form>
-                        </div>
+                        </div> */}
 
-                        {/* <div className="form-box register">
+                        <div className="form-box register">
                             <form action="#">
                                 <h2>Sign Up</h2>
+                                <label>User-Role Menu:</label>
+                                <select value={role} onChange={(e)=>setRole(e.target.value)}>
+                                    <option>Select</option>
+                                    <option>Admin</option>
+                                    <option>Patient</option>
+                                </select>
 
                                 <div className="input-box">
                                     <span className="icon"><i className='bx bxs-user' ></i></span>
@@ -198,15 +205,15 @@ function LogSign(){
                         
                                 </div>
 
-                                <button type="submit>" className="btn">Sign Up</button>
+                                <button type="submit>" className="btn" onClick={handleSubmit}>Sign Up</button>
 
                                 <div className="login-register">
-                                    <p>Already have an account? <Link  to="/" className="login-link link">Sign In</Link></p>
+                                    <p>Already have an account? <Link  to="/login" className="login-link link">Sign In</Link></p>
                                 </div>
                                 
                             </form>
                         </div>
- */}
+
 
                     </div>
                 </div>
@@ -215,4 +222,4 @@ function LogSign(){
     );
 };
 
-export default LogSign;
+export default SignUp;

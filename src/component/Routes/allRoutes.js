@@ -3,6 +3,7 @@ import { Private_routes, Public_routes } from "./Constant"
 import Navbar from "../Header/Navbar";
 import LogSign from "../LoginSignUp/LogSign";
 import { AuthProtected, FullPageRoute } from "./protectedRoute";
+import NotFound from "../Pages/NotFound";
 
 
 
@@ -27,7 +28,7 @@ const AllRoutes =()=>{
             <Routes>
                 {Public_routes.map((route, index)=>{
                     const {path, component} = route;
-
+                        console.log("routes from ",  path, index);
                     return <Route key={index} path={path} element={<FullPageRoute element={component} />} />
                 })}
 
@@ -38,6 +39,7 @@ const AllRoutes =()=>{
                     
                 })}
 
+                {/* <Route path="/*" element={<NotFound />} /> */}
             </Routes>
         </>
     )

@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import {Provider} from "react-redux";
 import { store } from './component/folderRedux/storeData/dataStore';
-
+import {Bounce, ToastContainer} from "react-toastify";
 
 
 
@@ -16,10 +16,25 @@ root.render(
 
 <Provider store={store}>
 <BrowserRouter>
+
   
   <App />
   
   </BrowserRouter>
+
+  <ToastContainer
+position="top-center"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"
+transition= {Bounce}
+/>
 </Provider>
 
 

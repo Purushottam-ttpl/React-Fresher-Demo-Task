@@ -17,9 +17,9 @@ function App() {
       {/* <Navbar /> */}
       <AllRoutes />
 
-      {/* <LogSign />
+      {/* <LogSign /> */}
       
-      <Sidebar /> */}
+      {/* <Sidebar /> */}
     </div>
   );
 }

@@ -1,17 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Navbar from '../Header/Navbar';
 
+
+
 const AuthProtected = ({ element }) => {
     const {isAuthenticated, accessToken} = useSelector((state) => state.auth);
+    let token = localStorage.getItem('Token');
+    // console.log('authtoken', token);
+    
+    useEffect(()=>{
+        token = localStorage.getItem('Token')
+    }, [isAuthenticated])
 
 
-    console.log("isAuthenticated from AuthProtected route---->",isAuthenticated);
-    console.log("accessToken from AuthProtected route---->",accessToken);
+    // console.log("login page token",token);
 
-    if (!isAuthenticated && !accessToken) {
-        return <Navigate to="/" replace />;
+    // console.log("isAuthenticated from AuthProtected route---->",isAuthenticated);
+    // console.log("accessToken from AuthProtected route---->",accessToken);
+
+    if (!token) {
+        return <Navigate to="/login" replace />;
     }
 
    
@@ -26,12 +36,17 @@ const AuthProtected = ({ element }) => {
 
 const FullPageRoute = ({ element }) => {
     const {isAuthenticated, accessToken} = useSelector((state) => state.auth);
+    let token = localStorage.getItem('Token');
+    // console.log("fullpagetoken", token);
+    useEffect(()=>{
+        token = localStorage.getItem('Token')
+    }, [isAuthenticated])
 
 
-    console.log("isAuthenticated from FullPageRoute route---->",isAuthenticated);
-    console.log("accessToken from FullPageRoute route---->",accessToken);
+    // console.log("isAuthenticated from FullPageRoute route---->",isAuthenticated);
+    // console.log("accessToken from FullPageRoute route---->",accessToken);
 
-    if (isAuthenticated && accessToken) {
+    if (token) {
         return <Navigate to="/home" replace />;
     }
 

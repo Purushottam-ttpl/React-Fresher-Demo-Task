@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "../Header/Navbar";
 import { useNavigate } from "react-router-dom";
+import Example from "../Table/table";
 
 const Home =()=>{
     // const navigate = useNavigate();
@@ -15,6 +16,7 @@ const Home =()=>{
             {/* <Navbar /> */}
             <h1 style={{color :"green"}}>Home Page</h1>
             {/* <button onClick={handleLogout}>Logout</button> */}
+            <Example />
         </div>
     );
 }

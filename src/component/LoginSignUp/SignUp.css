@@ -563,24 +563,24 @@
     color: #e4e4e4;
 }
 
-.logreg-box .form-box.login{
+.logreg-box .form-box.register{
     transform: translateX(0) !important;
     transition: transform .6s ease !important;
     transition-delay: .7s !important;
 }
 
-.logreg-box.active .form-box.login{
+.logreg-box.active .form-box.register{
     transform: translateX(430px) !important;
     transition-delay: 0s !important;
 }
 
-.logreg-box .form-box.register{
+.logreg-box .form-box.login{
     transform: translateX(430px);
     transition: transform .6s ease;
     transition-delay: 0s;
 }
 
-.logreg-box.active .form-box.register{
+.logreg-box.active .form-box.login{
     transform: translateX(0);
     transition-delay: .7s;
 }
