@@ -19,7 +19,7 @@ const Navbar =()=>{
 
         navigate("/login");
 
-        localStorage.removeItem("UserType");
+        // localStorage.removeItem("UserType");
        
         console.log("button clicked---->",e);
     };
@@ -43,17 +43,17 @@ const Navbar =()=>{
         </div>
         <ul>
             {userRole === "Admin" && (
-                <>
-                 <Link to="/home" className="Link">Home</Link>
-                 <Link to="/contact" className="Link">Contact</Link>
-                </>
+                <li>
+                     <Link to="/home" className="Link">Home</Link>
+                     <Link to="/contact" className="Link">Contact</Link>
+                </li>
+                
             )}
 
             {userRole === "Patient" && (
-                <>
+                <li>
                  <Link to="/about" className="Link">About</Link>
-                
-                </>
+                </li>
             )}
 
         {/* {Private_routes.map((route, index)=>{

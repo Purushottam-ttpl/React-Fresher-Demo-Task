@@ -1,37 +1,29 @@
 import React, { useEffect, useState } from "react";
 import "./SignUp.css";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import { login } from "../folderRedux/sliceNew/newSlice";
+import { login, register } from "../folderRedux/sliceNew/newSlice";
 import { useDispatch, useSelector } from "react-redux";
-
+import { toast } from "react-toastify";
 
 
 function SignUp(){
-    // const token = useSelector((state)=>state.auth.accessToken);
-
-    // const token=localStorage.getItem("token");
-    // console.log("login page token",token);
-
-    // useEffect(()=>{
-    //     if(token){
-    //        navigate("/home");
-    //     }
-    //     // else{
-    //     //     navigate("/home");
-    //     // }
-
-    //     console.log("useEffect rendered--->")
-
-    // },[]);
-
-
     
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    const [name, setName]=useState("Pradip")
     const [email, setEmail]=useState("rocky.323@gmail.com");
     const [password, setPassword]=useState("Rockyyy@323");
+    const [cnfPassword, setCnfPassword]=useState("Rockyyy@323");
     const [errors, setErrors]=useState({});
+    const [role, setRole]= useState();
+
+
+    function validateName(name) {
+        const nameRegx = /^[A-Za-z\s'-]{2,50}$/;
+        return nameRegx.test(name);
+      }
+    
 
     function validateEmail(email){
         const emailRegx = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
@@ -52,6 +44,18 @@ function SignUp(){
        console.log("validation of form executed---->",email)
 
         const validateErrors={};
+        if(!role){
+            validateErrors.role = "Role is required...!";
+        } 
+
+
+        if(!name){
+            validateErrors.name = "Name is required...!";
+        }
+        else if(!validateName(name)){
+            validateErrors.name = "Invalid name...!";
+        }
+
 
         if(!email){
             validateErrors.email = "Email is required...!";
@@ -68,16 +72,26 @@ function SignUp(){
             validateErrors.password = "Password must be at least 8 characters, contain one uppercase letter, and one special character...!"
         }
 
+        if (!cnfPassword) {
+            validateErrors.cnfPassword = "Confirm Password is required...!";
+          }
+        else if (password !== cnfPassword) {
+            validateErrors.cnfPassword = "Passwords does not match...!";
+          }
+
 
 
         if(Object.keys(validateErrors).length === 0){
-            // navigate("/home"); 
-
-            dispatch(login("123"));
+           
+            dispatch(register(role));
             alert("no errors");
+            toast.success("Register Successful, Login now...!")
+            navigate("/login"); 
+
         }
         else{
             setErrors(validateErrors);
+            toast.error("Register Failed...!")
         }
         console.log("validate errors---->",validateErrors);
         
@@ -95,13 +109,6 @@ function SignUp(){
         
     }
 
-    const [role, setRole]= useState();
-    
-    function handleSubmit(e){
-        e.preventDefault();
-         localStorage.setItem("UserType",role);
-
-    }
     console.log("user role--->",role)
     return(
         <>
@@ -142,37 +149,6 @@ function SignUp(){
                     </div>
 
                     <div className="logreg-box">
-                        {/* <div className="form-box login">
-                            <form>
-                                <h2>Sign In</h2>
-
-                                <div className="input-box">
-                                    <span className="icon"><i class='bx bxs-envelope' ></i></span>
-                                    <input type="text" value={email} onChange={(e)=>setEmail(e.target.value)} />
-                                    <label>Email</label>
-                                    {errors.email && <span className="error" style={{color:"red"}}>{errors.email}</span>}
-                                </div>
-                                <div className="input-box">
-                                    <span className="icon"><i class='bx bxs-lock-alt' ></i></span>
-                                    <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} />
-                                    <label>Password</label>
-                                    {errors.password && (<span className="error" style={{color:"red"}}>{errors.password}</span>)}
-                                </div>
-
-                                <div className="remember-forgot">
-                                    <label><input type="checkbox" />Remember me</label>
-                                    <Link to="#" className="link">Forgot Password?</Link>
-                                </div>
-
-                                <button type="submit" className="btn" onClick={handleClick}>Sign In</button>
-
-                                <div className="login-register">
-                                    <p>Don't have an account? <Link to="/register" className="register-link link">Sign Up</Link></p>
-                                </div>
-                                
-                            </form>
-                        </div> */}
-
                         <div className="form-box register">
                             <form action="#">
                                 <h2>Sign Up</h2>
@@ -182,22 +158,33 @@ function SignUp(){
                                     <option>Admin</option>
                                     <option>Patient</option>
                                 </select>
+                                {errors.role && <span className="error" style={{color:"red"}}>{errors.role}</span>}
 
                                 <div className="input-box">
                                     <span className="icon"><i className='bx bxs-user' ></i></span>
-                                    <input type="text" required />
+                                    <input type="text" value={name} onChange={(e)=>setName(e.target.value)} />
                                     <label>Name</label>
+                                    {errors.name && <span className="error" style={{color:"red"}}>{errors.name}</span>}
+
                                 </div>
 
                                 <div className="input-box">
                                     <span className="icon"><i className='bx bxs-envelope' ></i></span>
-                                    <input type="email" required />
+                                    <input type="text" value={email} onChange={(e)=>setEmail(e.target.value)} />
                                     <label>Email</label>
+                                    {errors.email && <span className="error" style={{color:"red"}}>{errors.email}</span>}
                                 </div>
                                 <div className="input-box">
                                     <span className="icon"><i className='bx bxs-lock-alt' ></i></span>
-                                    <input type="password" required />
+                                    <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} />
                                     <label>Password</label>
+                                    {errors.password && (<span className="error" style={{color:"red"}}>{errors.password}</span>)}
+                                </div>
+                                <div className="input-box">
+                                    <span className="icon"><i className='bx bxs-lock-alt' ></i></span>
+                                    <input type="password" value={cnfPassword} onChange={(e)=>setCnfPassword(e.target.value)} />
+                                    <label>Confirm Password</label>
+                                    {errors.cnfPassword && (<span className="error" style={{color:"red"}}>{errors.cnfPassword}</span>)}
                                 </div>
 
                                 <div className="remember-forgot">
@@ -205,7 +192,7 @@ function SignUp(){
                         
                                 </div>
 
-                                <button type="submit>" className="btn" onClick={handleSubmit}>Sign Up</button>
+                                <button type="submit>" className="btn" onClick={handleClick}>Sign Up</button>
 
                                 <div className="login-register">
                                     <p>Already have an account? <Link  to="/login" className="login-link link">Sign In</Link></p>

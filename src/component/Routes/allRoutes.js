@@ -4,6 +4,7 @@ import Navbar from "../Header/Navbar";
 import LogSign from "../LoginSignUp/LogSign";
 import { AuthProtected, FullPageRoute } from "./protectedRoute";
 import NotFound from "../Pages/NotFound";
+import UnAuthorize from "../Pages/UnAuthorize";
 
 
 
@@ -39,7 +40,9 @@ const AllRoutes =()=>{
                     
                 })}
 
-                {/* <Route path="/*" element={<NotFound />} /> */}
+                <Route path="/unAuth" element={<UnAuthorize />} />
+
+                <Route path="*" element={<NotFound />} />
             </Routes>
         </>
     )

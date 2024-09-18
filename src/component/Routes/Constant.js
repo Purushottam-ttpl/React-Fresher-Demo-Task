@@ -1,4 +1,3 @@
-import Login from "../Authentication/Login";
 import LogSign from "../LoginSignUp/LogSign";
 import SignUp from "../LoginSignUp/SignUp";
 import About from "../Pages/About";

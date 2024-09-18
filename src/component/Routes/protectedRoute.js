@@ -8,17 +8,10 @@ import Navbar from '../Header/Navbar';
 const AuthProtected = ({ element }) => {
     const {isAuthenticated, accessToken} = useSelector((state) => state.auth);
     let token = localStorage.getItem('Token');
-    // console.log('authtoken', token);
-    
+
     useEffect(()=>{
         token = localStorage.getItem('Token')
     }, [isAuthenticated])
-
-
-    // console.log("login page token",token);
-
-    // console.log("isAuthenticated from AuthProtected route---->",isAuthenticated);
-    // console.log("accessToken from AuthProtected route---->",accessToken);
 
     if (!token) {
         return <Navigate to="/login" replace />;
@@ -35,21 +28,28 @@ const AuthProtected = ({ element }) => {
 };
 
 const FullPageRoute = ({ element }) => {
-    const {isAuthenticated, accessToken} = useSelector((state) => state.auth);
+    const {isAuthenticated, accessToken, role} = useSelector((state) => state.auth);
     let token = localStorage.getItem('Token');
-    // console.log("fullpagetoken", token);
+    let Role = localStorage.getItem('UserType');
+
     useEffect(()=>{
         token = localStorage.getItem('Token')
+        Role = localStorage.getItem('UserType');
     }, [isAuthenticated])
 
-
-    // console.log("isAuthenticated from FullPageRoute route---->",isAuthenticated);
-    // console.log("accessToken from FullPageRoute route---->",accessToken);
-
     if (token) {
-        return <Navigate to="/home" replace />;
-    }
+        if (Role === 'Admin') {
+            return <Navigate to="/contact" replace />;
+          } 
+          else if (Role === 'Patient') {
+            return <Navigate to="/about" replace />;
+          } 
+          else if(!Role){
+            return <Navigate to="/unAuth" replace />; 
+          }
 
+        // return <Navigate to="/home" replace />;
+    }
     
     return element;
 };

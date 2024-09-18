@@ -7,31 +7,10 @@ import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 // import SignUp from "./SignUp";
 
-
-
-
-function LogSign(){
-    // const token = useSelector((state)=>state.auth.accessToken);
-
-    // const token=localStorage.getItem("token");
-    // console.log("login page token",token);
-
-    // useEffect(()=>{
-    //     if(token){
-    //        navigate("/home");
-    //     }
-    //     // else{
-    //     //     navigate("/home");
-    //     // }
-
-    //     console.log("useEffect rendered--->")
-
-    // },[]);
-
-
-    
+function LogSign(){    
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    let Role = localStorage.getItem("UserType");
 
     const [email, setEmail]=useState("rocky.323@gmail.com");
     const [password, setPassword]=useState("Rockyyy@323");
@@ -75,11 +54,20 @@ function LogSign(){
 
 
         if(Object.keys(validateErrors).length === 0){
-            // navigate("/home"); 
+            if(Role){
+                dispatch(login("Login123"));
+                // alert("no errors");
+                toast.success("Login Successful...!")
 
-            dispatch(login("123"));
-            // alert("no errors");
-            toast.success("Login Successful...!")
+            }
+            else{
+                navigate("/unAuth");
+            }
+             
+            
+            // dispatch(login("Login123"));
+            // // alert("no errors");
+            // toast.success("Login Successful...!")
         }
         else{
             setErrors(validateErrors);
@@ -171,43 +159,6 @@ function LogSign(){
                                 
                             </form>
                         </div>
-
-                        {/* <div className="form-box register">
-                            <form action="#">
-                                <h2>Sign Up</h2>
-
-                                <div className="input-box">
-                                    <span className="icon"><i className='bx bxs-user' ></i></span>
-                                    <input type="text" required />
-                                    <label>Name</label>
-                                </div>
-
-                                <div className="input-box">
-                                    <span className="icon"><i className='bx bxs-envelope' ></i></span>
-                                    <input type="email" required />
-                                    <label>Email</label>
-                                </div>
-                                <div className="input-box">
-                                    <span className="icon"><i className='bx bxs-lock-alt' ></i></span>
-                                    <input type="password" required />
-                                    <label>Password</label>
-                                </div>
-
-                                <div className="remember-forgot">
-                                    <label><input type="checkbox" />I am agree to the terms & conditions</label>
-                        
-                                </div>
-
-                                <button type="submit>" className="btn">Sign Up</button>
-
-                                <div className="login-register">
-                                    <p>Already have an account? <Link  to="/" className="login-link link">Sign In</Link></p>
-                                </div>
-                                
-                            </form>
-                        </div>
- */}
-
                     </div>
                 </div>
             </div>
