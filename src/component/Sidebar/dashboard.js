@@ -104,24 +104,30 @@
 
 
 
-import React, { useState } from 'react';
-import { Link } from "react-router-dom";
-import './sidebar.css'; // Import the CSS file
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from "react-router-dom";
+import './dashboard.css'; // Import the CSS file
 import 'boxicons/css/boxicons.min.css'; // Import the Boxicons
 
-function Sidebar(){
+function Dashboard(){
     const [isActive, setIsActive] = useState(false);
+    const navigte = useNavigate()
 
     const toggleSidebar = () => {
         setIsActive(!isActive);
     };
 
+    useEffect(()=>{
+        if(localStorage.getItem('UserType')=== 'Patient'){
+            navigte("/home")
+        }
+    },[])
     return (
         <>
          <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet' />
 
 
-<nav className={`sidebar ${isActive ? 'active' : ''}`}>
+ <nav className={`sidebar ${isActive ? 'active' : ''}`}>
             <div className="logo-menu">
                 <h2 className="logo">Dashboard</h2>
                 <i className='bx bx-menu toggle-btn' onClick={toggleSidebar}></i>
@@ -182,4 +188,4 @@ function Sidebar(){
     );
 };
 
-export default Sidebar;
+export default Dashboard;

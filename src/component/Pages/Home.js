@@ -16,7 +16,6 @@ const Home =()=>{
             {/* <Navbar /> */}
             <h1 style={{color :"green"}}>Home Page</h1>
             {/* <button onClick={handleLogout}>Logout</button> */}
-            <Example />
         </div>
     );
 }

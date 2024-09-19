@@ -126,6 +126,7 @@ header .menu{
     }
 
     header ul{
+        z-index: 99;
         position: fixed;
         top: 100px;
         right: -100%;

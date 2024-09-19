@@ -1,28 +1,46 @@
 import { Link } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import { Private_routes } from "../Routes/Constant";
 import { logout } from "../folderRedux/sliceNew/newSlice";
 import { useDispatch } from "react-redux";
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
 
 
 const Navbar =()=>{
+    const [open, setOpen] = useState(false);
   
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const userRole = localStorage.getItem("UserType");
     console.log("role from navbar--->",userRole);
 
-    const handleLogout=(e)=>{
-        dispatch(logout());
 
-        navigate("/login");
+    const handleLogout=(e)=>{
+        setOpen(true);
+
+        // dispatch(logout());
+
+        // navigate("/");
 
         // localStorage.removeItem("UserType");
        
         console.log("button clicked---->",e);
     };
+
+    const handleConfirmLogout = () => {
+        setOpen(false);
+        dispatch(logout());
+        // Navigate to login or home after logout
+        // navigate("/");
+        // localStorage.removeItem("UserType");
+        // console.log("Logged out");
+      };
+    
+      const handleClose = () => {
+        setOpen(false); // Close dialog without logging out
+      };
 
     return(
 
@@ -42,19 +60,43 @@ const Navbar =()=>{
         </form>
         </div>
         <ul>
-            {userRole === "Admin" && (
+        {/* {userRole === 'Admin' ? (
+            <li>
+                 <Link to="/contact" className="Link">Contact</Link>
+                 <Link to="/sidebar" className="Link">Sidebar</Link>
+            </li>
+            ) : userRole === 'Patient' ? (
                 <li>
-                     <Link to="/home" className="Link">Home</Link>
+                <Link to="/about" className="Link">About</Link>
+               </li>
+            ) : userRole &&(
+                <li>
+                <Link to="/home" className="Link">Home</Link>
+               </li>
+        )} */}
+
+        
+         <li>
+         {userRole === "Admin" && (
+                <>
                      <Link to="/contact" className="Link">Contact</Link>
-                </li>
-                
+                     <Link to="/dashboard" className="Link">Dashboard</Link>
+                </>
             )}
 
             {userRole === "Patient" && (
-                <li>
+                <>
                  <Link to="/about" className="Link">About</Link>
-                </li>
+                </>
             )}
+
+            {userRole && (
+                <>
+                 <Link to="/home" className="Link">Home</Link>
+                </>
+            )}
+        </li>
+           
 
         {/* {Private_routes.map((route, index)=>{
             const {path, name} = route;
@@ -70,7 +112,7 @@ const Navbar =()=>{
            
         </li>
 
-        <button  onClick={handleLogout}><i className="fa-solid fa-circle-user"></i></button>
+        <button  variant="contained" color="secondary" onClick={handleLogout}><i className="fa-solid fa-circle-user"></i></button>
 
         </ul>
         <div className="menu">
@@ -80,6 +122,22 @@ const Navbar =()=>{
         </div>
         </header>
         {/* </div> */}
+
+        <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Confirm Logout</DialogTitle>
+        <DialogContent>
+          <DialogContentText>Are you sure you want to logout?</DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            No
+          </Button>
+          <Button onClick={handleConfirmLogout} color="primary" autoFocus>
+            Yes
+          </Button>
+        </DialogActions>
+      </Dialog>
+
         </div>
 
 
@@ -90,25 +148,6 @@ const Navbar =()=>{
 
 export default Navbar;
 
-
-
-
-        //  <nav>
-        //     <ul>
-        //        {Private_routes.map((route, index)=>{
-        //         const {path, name} = route
-        //             return  <li key={index}>
-        //                     <Link to={path}>{name}</Link>
-        //                     </li>
-        //         })}
-        //     </ul>
-        // </nav>
-
-
-        /* <li><a href="#">Home</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Login</a></li> */
             
 
 

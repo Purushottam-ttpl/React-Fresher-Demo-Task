@@ -1,9 +1,12 @@
 
 import { createSlice } from '@reduxjs/toolkit';
 
+const token = localStorage.getItem('Token');
+const Role = localStorage.getItem("UserType");
+
 const initialState = {
-    isAuthenticated: false,
-    accessToken: null,
+    isAuthenticated: token ? true: false,
+    accessToken:null,
     role: null, 
 };
 

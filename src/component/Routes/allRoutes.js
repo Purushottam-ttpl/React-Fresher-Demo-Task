@@ -29,14 +29,15 @@ const AllRoutes =()=>{
             <Routes>
                 {Public_routes.map((route, index)=>{
                     const {path, component} = route;
-                        console.log("routes from ",  path, index);
+                        console.log("routes from---- ",  path, index);
                     return <Route key={index} path={path} element={<FullPageRoute element={component} />} />
                 })}
 
                 {Private_routes.map((route, index)=>{
-                       const {path, component} = route;
+                       const {path, component, allowedRoles} = route;
+                    //    const allowedRoles = path === "/dashboard" ? ["Admin"] : ["Patient","Admin"];
 
-                    return <Route key={index} path={path} element={<AuthProtected element={component} />} />
+                    return <Route key={index} path={path} element={<AuthProtected element={component} allowedRoles={allowedRoles} />} />
                     
                 })}
 

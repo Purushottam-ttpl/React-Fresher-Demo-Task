@@ -3,7 +3,7 @@ import './App.css';
 import Navbar from './component/Header/Navbar';
 import { routes } from './component/Routes/Constant';
 import AllRoutes from './component/Routes/allRoutes';
-import Sidebar from './component/Sidebar/sidebar';
+import Sidebar from './component/Sidebar/dashboard';
 import LogSign from './component/LoginSignUp/LogSign';
 
 function App() {

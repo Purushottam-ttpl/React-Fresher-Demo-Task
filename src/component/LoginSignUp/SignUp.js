@@ -85,8 +85,8 @@ function SignUp(){
            
             dispatch(register(role));
             alert("no errors");
-            toast.success("Register Successful, Login now...!")
-            navigate("/login"); 
+            toast.success("Register Successful,Login now...!")
+            navigate("/"); 
 
         }
         else{
@@ -195,7 +195,7 @@ function SignUp(){
                                 <button type="submit>" className="btn" onClick={handleClick}>Sign Up</button>
 
                                 <div className="login-register">
-                                    <p>Already have an account? <Link  to="/login" className="login-link link">Sign In</Link></p>
+                                    <p>Already have an account? <Link  to="/" className="login-link link">Sign In</Link></p>
                                 </div>
                                 
                             </form>

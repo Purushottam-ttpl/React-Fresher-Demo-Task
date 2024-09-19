@@ -5,91 +5,29 @@ import {
 } from 'material-react-table';
 import axios from "axios";
 
-//example data type
-// const Person = {
-//   name: {
-//     firstName: "",
-//     lastName: "",
-//   },
-//   address: "",
-//   city: "",
-//   state: "",
-// };
-
-//nested data is ok, see accessorKeys in ColumnDef below
-// const data = [
-//   {
-//     name: {
-//       firstName: 'John',
-//       lastName: 'Doe',
-//     },
-//     address: '261 Erdman Ford',
-//     city: 'East Daphne',
-//     state: 'Kentucky',
-//   },
-//   {
-//     name: {
-//       firstName: 'Jane',
-//       lastName: 'Doe',
-//     },
-//     address: '769 Dominic Grove',
-//     city: 'Columbus',
-//     state: 'Ohio',
-//   },
-//   {
-//     name: {
-//       firstName: 'Joe',
-//       lastName: 'Doe',
-//     },
-//     address: '566 Brakus Inlet',
-//     city: 'South Linda',
-//     state: 'West Virginia',
-//   },
-//   {
-//     name: {
-//       firstName: 'Kevin',
-//       lastName: 'Vandy',
-//     },
-//     address: '722 Emie Stream',
-//     city: 'Lincoln',
-//     state: 'Nebraska',
-//   },
-//   {
-//     name: {
-//       firstName: 'Joshua',
-//       lastName: 'Rolluffs',
-//     },
-//     address: '32188 Larkin Turnpike',
-//     city: 'Omaha',
-//     state: 'Nebraska',
-//   },
- 
-// ];
-
 const Example = () => {
-  //should be memoized or stable
 
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-console.log("data from useState--->",data);
+  console.log("data from useState--->",data);
 
     useEffect(()=>{
+      setTimeout(() => {
         getData();
+      }, 1000);
     },[]);
 
     const getData=()=>{
+      
         axios.get("https://jsonplaceholder.typicode.com/users")
-            .then(response=>{
-                console.log("data", response);
-                console.log("respons data--->", response.data);
-                setData(response.data);
-                setLoading(false);
-            })
-            .catch(error=>{
-                console.log("error", error);
-            })
-
-       
+          .then(response => {
+            setData(response.data);
+            setLoading(false); 
+          })
+          .catch(error => {
+            console.log("error", error);
+            setLoading(false);
+          });
     };
 
 
@@ -131,9 +69,38 @@ console.log("data from useState--->",data);
 
   return(
     <>
-    {!loading &&(
-         <MaterialReactTable table={table} />
-    )}     
+      <MaterialReactTable
+      columns={columns}
+      data={data}
+      state={{ isLoading: loading }}
+      muiCircularProgressProps={{
+        color: 'secondary',
+        thickness: 5,
+        size: 55,
+      }}
+      muiSkeletonProps={{
+        animation: 'pulse',
+        height: 28,
+      }}
+    />  
+
+{/* {!loading &&( */}
+  
+{/* <MaterialReactTable table={table} 
+    state={{
+      isLoading: loading, // Show loader when data is loading
+      showSkeleton: loading,
+    }}
+    muiTablePaperProps={{
+      elevation: 3,
+    }}
+    /> */}
+{/* )}      */}
+
+
+
+
+  
     </>
   );
 };
