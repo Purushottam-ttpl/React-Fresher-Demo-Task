@@ -1,5 +1,5 @@
 import { Navigate, Outlet, Route, Routes, useLocation, useNavigate } from "react-router-dom"
-import { Private_routes, Public_routes } from "./Constant"
+import { Normal_routes, Private_routes, Public_routes } from "./Constant"
 import Navbar from "../Header/Navbar";
 import LogSign from "../LoginSignUp/LogSign";
 import { AuthProtected, FullPageRoute } from "./protectedRoute";
@@ -41,9 +41,15 @@ const AllRoutes =()=>{
                     
                 })}
 
-                <Route path="/unAuth" element={<UnAuthorize />} />
+                {Normal_routes.map((route, index)=>{
+                    const {path, component} = route;
+                        console.log("routes from---- ",  path, index);
+                    return <Route key={index} path={path} element={component} />
+                })}
 
-                <Route path="*" element={<NotFound />} />
+                {/* <Route path="/unAuth" element={<UnAuthorize />} />
+
+                <Route path="*" element={<NotFound />} /> */}
             </Routes>
         </>
     )

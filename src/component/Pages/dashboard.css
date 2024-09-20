@@ -141,8 +141,17 @@ body {
     background-position: center;
 }
 
+.main{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+   
+   
+}
+
 .sidebar {
-    position: fixed;
+
+    /* position: fixed; */
     top: 73px;
     left: 0;
     width: 80px;
@@ -242,6 +251,40 @@ body {
     opacity: 1;
     pointer-events: auto;
     transition-delay: calc(.1s * var(--i));
+}
+
+.panel-container {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #ffffff;
+    overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+    /* .main {
+        position: relative;
+    }
+
+    .sidebar {
+        position: absolute;
+        left: -250px; /* Hidden by default */
+    /* }
+
+    .sidebar.active {
+        left: 0;
+    }*/
+
+     .panel-container {
+        display: none; /* Hide panel by default on small screens */
+     }
+
+    .sidebar.active ~ .panel-container {
+        display: none; /* Hide panel when sidebar is active */
+    }
+
+    .sidebar:not(.active) ~ .panel-container {
+        display: block; /* Show panel when sidebar is inactive */
+    }
 }
 
 

@@ -13,7 +13,7 @@ const UnAuthorize = () => {
   return (
     <div className="not-found">
       <h1>UnAuthorize</h1>
-      <h2>Please select Role...!</h2>
+      <h2>Please select Proper Role...!</h2>
       <p>Can't give you access...!</p>
       {/* <button onClick={() => window.history.back()}>Go Back</button> */}
       <button onClick={() => window.history.back()}>Go Back</button>

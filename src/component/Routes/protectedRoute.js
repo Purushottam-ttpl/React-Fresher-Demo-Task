@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Navbar from '../Header/Navbar';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -9,6 +10,7 @@ const AuthProtected = ({ element, allowedRoles }) => {
     const {isAuthenticated, accessToken, role} = useSelector((state) => state.auth);
     let token = localStorage.getItem('Token');
     let Role = localStorage.getItem("UserType");
+    const navigate = useNavigate();
 
     useEffect(()=>{
       let  token = localStorage.getItem('Token')
@@ -27,7 +29,8 @@ const AuthProtected = ({ element, allowedRoles }) => {
     console.log("Allowedroles----->",allowedRoles[0])
 
     if (!allowedRoles.includes(Role)) {
-        return <Navigate to="/*" replace />;
+        console.log('Allowed roles if')
+        return <Navigate to="/unAuth" replace />;
     }
 
    
@@ -53,12 +56,15 @@ const FullPageRoute = ({ element }) => {
     }, [isAuthenticated])
 
     if (token && isAuthenticated && Role) {
-        if (Role === 'Admin') {
-            return <Navigate to="/dashboard" replace />;
-          } 
-          else if (Role === 'Patient') {
-            return <Navigate to="/about" replace />;
-          } 
+        if (Role === 'Admin' || 'Patient') {
+            return <Navigate to="/home" replace />;
+          }
+        //   else if (token && isAuthenticated && Role){
+        //     <Navigate to="/unAuth" />
+        //   } 
+        //   else if (Role === 'Patient') {
+        //     return <Navigate to="/home" replace />;
+        //   } 
         //   else if(!Role){
         //     return <Navigate to="/unAuth" replace />; 
         //   }

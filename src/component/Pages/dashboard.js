@@ -106,8 +106,9 @@
 
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
-import './dashboard.css'; // Import the CSS file
-import 'boxicons/css/boxicons.min.css'; // Import the Boxicons
+import './dashboard.css'; 
+import 'boxicons/css/boxicons.min.css'; 
+import Panel from './panel';
 
 function Dashboard(){
     const [isActive, setIsActive] = useState(false);
@@ -123,7 +124,7 @@ function Dashboard(){
         }
     },[])
     return (
-        <>
+        <div className='main'>
          <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet' />
 
 
@@ -183,7 +184,10 @@ function Dashboard(){
                 </li>
             </ul>
         </nav>
-        </>
+        <div className="panel-container">
+                <Panel />
+            </div>
+        </div>
        
     );
 };
