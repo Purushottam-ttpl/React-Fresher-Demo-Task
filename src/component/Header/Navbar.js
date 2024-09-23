@@ -19,12 +19,6 @@ const Navbar =()=>{
 
     const handleLogout=(e)=>{
         setOpen(true);
-
-        // dispatch(logout());
-
-        // navigate("/");
-
-        // localStorage.removeItem("UserType");
        
         console.log("button clicked---->",e);
     };
@@ -32,14 +26,11 @@ const Navbar =()=>{
     const handleConfirmLogout = () => {
         setOpen(false);
         dispatch(logout());
-        // Navigate to login or home after logout
-        // navigate("/");
-        // localStorage.removeItem("UserType");
-        // console.log("Logged out");
+  
       };
     
       const handleClose = () => {
-        setOpen(false); // Close dialog without logging out
+        setOpen(false); 
       };
 
     return(

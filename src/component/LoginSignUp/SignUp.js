@@ -7,7 +7,6 @@ import { toast } from "react-toastify";
 
 
 function SignUp(){
-    
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -84,9 +83,11 @@ function SignUp(){
         if(Object.keys(validateErrors).length === 0){
            
             dispatch(register(role));
-            alert("no errors");
-            toast.success("Register Successful,Login now...!")
+            // alert("no errors");
+            toast.success("Register Successful, Login now..!")
             navigate("/"); 
+
+
 
         }
         else{
@@ -105,7 +106,6 @@ function SignUp(){
         validateSubmitForm();
         console.log("handleclick function executed---->",e)
         // const accessToken = 'eyJhbGciOi';
-        
         
     }
 
@@ -151,14 +151,19 @@ function SignUp(){
                     <div className="logreg-box">
                         <div className="form-box register">
                             <form action="#">
-                                <h2>Sign Up</h2>
-                                <label>User-Role Menu:</label>
-                                <select value={role} onChange={(e)=>setRole(e.target.value)}>
+                                <h2 style={{marginBottom:"5px"}}>Sign Up</h2>
+
+                                <div style={{left:"97px", position:"relative"}}>
+                                <label style={{color:"white", fontWeight:"bold"}}>User-Role :</label>
+                                <select value={role} onChange={(e)=>setRole(e.target.value)} style={{border:"none", outline:"none", background:"transparent", color:"black"}}>
+                                    
                                     <option>Select</option>
                                     <option>Admin</option>
                                     <option>Patient</option>
+                                    
                                 </select>
                                 {errors.role && <span className="error" style={{color:"red"}}>{errors.role}</span>}
+                                </div>
 
                                 <div className="input-box">
                                     <span className="icon"><i className='bx bxs-user' ></i></span>

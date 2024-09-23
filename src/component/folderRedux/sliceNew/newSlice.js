@@ -1,5 +1,6 @@
 
 import { createSlice } from '@reduxjs/toolkit';
+import { FETCH_USER_DATA, FETCH_USER_DATA_SUCCESS, FETCH_USER_DATA_FAILURE } from '../saga/actions';
 
 const token = localStorage.getItem('Token');
 const Role = localStorage.getItem("UserType");
@@ -8,6 +9,10 @@ const initialState = {
     isAuthenticated: token ? true: false,
     accessToken:null,
     role: null, 
+
+    data: [],
+    loading: false,
+    error: null,
 };
 
 const authSlice = createSlice({
@@ -39,7 +44,27 @@ const authSlice = createSlice({
             localStorage.removeItem("Token",action.payload)
             localStorage.removeItem("UserType",action.payload)
         },
+
     },
+
+
+    extraReducers: (builder) => {
+        builder
+            .addCase(FETCH_USER_DATA, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(FETCH_USER_DATA_SUCCESS, (state, action) => {
+                state.loading = false;
+                state.data = action.payload;
+            })
+            .addCase(FETCH_USER_DATA_FAILURE, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            });
+    },
+    
+
 });
 
 

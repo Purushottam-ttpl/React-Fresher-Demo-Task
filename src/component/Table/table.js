@@ -1,108 +1,71 @@
 import { useEffect, useMemo, useState } from 'react';
-import {
-  MaterialReactTable,
-  useMaterialReactTable,
-} from 'material-react-table';
-import axios from "axios";
+import TableService from '../services/tableServices/tableService';
+import CustomTable from './customTable';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchUserData } from '../folderRedux/saga/actions';
 
-const Example = () => {
 
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
+const Table = () => {
+
+  const dispatch = useDispatch();
+  const {data, loading} = useSelector((state) => state.auth);
+
+  // const [data, setData] = useState([]);
+  // const [loading, setLoading] = useState(true);
   console.log("data from useState--->",data);
 
-    useEffect(()=>{
-      setTimeout(() => {
-        getData();
-      }, 1000);
-    },[]);
-
-    const getData=()=>{
-      
-        axios.get("https://jsonplaceholder.typicode.com/users")
-          .then(response => {
-            setData(response.data);
-            setLoading(false); 
-          })
-          .catch(error => {
-            console.log("error", error);
-            setLoading(false);
-          });
-    };
+  const columnConfig = [
+    {accessorKey: 'id', header: 'ID', size: 150},
+    {accessorKey: 'name', header: 'Name', size: '150'},
+    { accessorKey: 'username', header: 'Username', size: 200 },
+    { accessorKey: 'email', header: 'Email', size: 150 },
+    { accessorKey: 'address.city', header: 'City', size: 150 },
+  ];
 
 
-  const columns = useMemo(
-    () => [
-      {
-        accessorKey: 'id', //access nested data with dot notation
-        header: 'ID',
-        size: 150,
-      },
-      {
-        accessorKey: 'name',
-        header: 'Name',
-        size: 150,
-      },
-      {
-        accessorKey: 'username', //normal accessorKey
-        header: 'Username',
-        size: 200,
-      },
-      {
-        accessorKey: 'email',
-        header: 'Email',
-        size: 150,
-      },
-      {
-        accessorKey: 'address.city',
-        header: 'City',
-        size: 150,
-      },
-    ],
-    [],
-  );
+  useEffect(()=>{
+    // dispatch(fetchUserData('https://jsonplaceholder.typicode.com/users'));
 
-  const table = useMaterialReactTable({
-    columns,
-    data, //data must be memoized or stable (useState, useMemo, defined outside of this component, etc.)
-  });
+    const table_Key = process.env.REACT_APP_TABLE_API_KEY;
+    dispatch(fetchUserData(table_Key));
+
+  },[dispatch]);
+
+    // useEffect(()=>{
+    //   setTimeout(() => {
+    //     fetchData();
+    //   }, 1000);
+    // },[]);
+
+
+    // const fetchData= async ()=>{
+    //     try {
+    //       const response = await TableService.getUserData();
+    //       setData(response.data);
+    //       setLoading(false);
+    //     } catch (error) {
+    //       console.log("error", error);
+    //       setLoading(false);
+    //     }
+    // };
+
+
+  const columns = useMemo(()=>
+    columnConfig.map((col)=>({
+      accessorKey: col.accessorKey,
+      header: col.header,
+      size: col.size
+    }))
+  ,[columnConfig],
+);
 
   return(
-    <>
-      <MaterialReactTable
-      columns={columns}
-      data={data}
-      state={{ isLoading: loading }}
-      muiCircularProgressProps={{
-        color: 'secondary',
-        thickness: 5,
-        size: 55,
-      }}
-      muiSkeletonProps={{
-        animation: 'pulse',
-        height: 28,
-      }}
-    />  
-
-{/* {!loading &&( */}
-  
-{/* <MaterialReactTable table={table} 
-    state={{
-      isLoading: loading, // Show loader when data is loading
-      showSkeleton: loading,
-    }}
-    muiTablePaperProps={{
-      elevation: 3,
-    }}
-    /> */}
-{/* )}      */}
-
-
-
-
-  
-    </>
+    <CustomTable
+    data={data}
+    columns={columns}
+    loading={loading}
+    />
   );
 };
 
-export default Example;
+export default Table;
