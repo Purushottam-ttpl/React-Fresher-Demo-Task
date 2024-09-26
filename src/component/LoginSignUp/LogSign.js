@@ -5,7 +5,6 @@ import { login } from "../folderRedux/sliceNew/newSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-// import SignUp from "./SignUp";
 
 function LogSign(){    
     const dispatch = useDispatch();
@@ -14,21 +13,18 @@ function LogSign(){
 
     const [email, setEmail]=useState("rocky.323@gmail.com");
     const [password, setPassword]=useState("Rockyyy@323");
+    const [showPassword, setShowPassword] = useState(false);
     const [errors, setErrors]=useState({});
 
     function validateEmail(email){
         const emailRegx = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
         return emailRegx.test(email);
     }
-    // console.log("validate email---->",email);
-
 
     function validatePassword(password){
         const passwordRegx = /^(?=.*[A-Z])(?=.*[!@#$%^&*()_+{}[\]:;<>,.?~\\/-])[A-Za-z\d!@#$%^&*()_+{}[\]:;<>,.?~\\/-]{8,}$/;
         return passwordRegx.test(password);
     }
-    // console.log("validate password---->",password);
-
 
 
     function validateSubmitForm(e){
@@ -65,10 +61,6 @@ function LogSign(){
                 navigate("/unAuth");
             }
              
-            
-            // dispatch(login("Login123"));
-            // // alert("no errors");
-            // toast.success("Login Successful...!")
         }
         else{
             setErrors(validateErrors);
@@ -78,16 +70,11 @@ function LogSign(){
         
     }
     
-    // console.log("validate errors---->",errors);
-
     function handleClick(e){
 
         e.preventDefault();
         validateSubmitForm();
-        console.log("handleclick function executed---->",e)
-        // const accessToken = 'eyJhbGciOi';
-        
-        
+        console.log("handleclick function executed---->",e)        
     }
 
     
@@ -140,11 +127,17 @@ function LogSign(){
                                     <label>Email</label>
                                     {errors.email && <span className="error" style={{color:"red"}}>{errors.email}</span>}
                                 </div>
+
                                 <div className="input-box">
-                                    <span className="icon"><i class='bx bxs-lock-alt' ></i></span>
-                                    <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} />
+                                    <span className="icon" onClick={() => setShowPassword(!showPassword)} >
+                                        <i className={showPassword ? 'bx bx-lock-open' : 'bx bx-lock'}></i>
+                                    </span>
+                                    <input
+                                        type={showPassword ? "text" : "password"}
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}/>
                                     <label>Password</label>
-                                    {errors.password && (<span className="error" style={{color:"red"}}>{errors.password}</span>)}
+                                    {errors.password && <span className="error" style={{ color: "red" }}>{errors.password}</span>}
                                 </div>
 
                                 <div className="remember-forgot">

@@ -14,6 +14,9 @@ function SignUp(){
     const [email, setEmail]=useState("rocky.323@gmail.com");
     const [password, setPassword]=useState("Rockyyy@323");
     const [cnfPassword, setCnfPassword]=useState("Rockyyy@323");
+    const [showPassword, setShowPassword] = useState(false);
+    const [showCnfPassword, setShowCnfPassword] = useState(false);
+
     const [errors, setErrors]=useState({});
     const [role, setRole]= useState();
 
@@ -28,15 +31,11 @@ function SignUp(){
         const emailRegx = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
         return emailRegx.test(email);
     }
-    // console.log("validate email---->",email);
-
 
     function validatePassword(password){
         const passwordRegx = /^(?=.*[A-Z])(?=.*[!@#$%^&*()_+{}[\]:;<>,.?~\\/-])[A-Za-z\d!@#$%^&*()_+{}[\]:;<>,.?~\\/-]{8,}$/;
         return passwordRegx.test(password);
     }
-    // console.log("validate password---->",password);
-
 
 
     function validateSubmitForm(e){
@@ -83,7 +82,6 @@ function SignUp(){
         if(Object.keys(validateErrors).length === 0){
            
             dispatch(register(role));
-            // alert("no errors");
             toast.success("Register Successful, Login now..!")
             navigate("/"); 
 
@@ -98,15 +96,11 @@ function SignUp(){
         
     }
     
-    // console.log("validate errors---->",errors);
-
     function handleClick(e){
 
         e.preventDefault();
         validateSubmitForm();
-        console.log("handleclick function executed---->",e)
-        // const accessToken = 'eyJhbGciOi';
-        
+        console.log("handleclick function executed---->",e)        
     }
 
     console.log("user role--->",role)
@@ -180,16 +174,27 @@ function SignUp(){
                                     {errors.email && <span className="error" style={{color:"red"}}>{errors.email}</span>}
                                 </div>
                                 <div className="input-box">
-                                    <span className="icon"><i className='bx bxs-lock-alt' ></i></span>
-                                    <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} />
+                                    <span className="icon" onClick={() => setShowPassword(!showPassword)} >
+                                        <i className={showPassword ? 'bx bx-lock-open' : 'bx bx-lock'}></i>
+                                    </span>
+                                    <input
+                                        type={showPassword ? "text" : "password"} 
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}/>
                                     <label>Password</label>
-                                    {errors.password && (<span className="error" style={{color:"red"}}>{errors.password}</span>)}
+                                    {errors.password && <span className="error" style={{ color: "red" }}>{errors.password}</span>}
                                 </div>
-                                <div className="input-box">
-                                    <span className="icon"><i className='bx bxs-lock-alt' ></i></span>
-                                    <input type="password" value={cnfPassword} onChange={(e)=>setCnfPassword(e.target.value)} />
+                               
+                                 <div className="input-box">
+                                    <span className="icon" onClick={() => setShowCnfPassword(!showCnfPassword)} >
+                                        <i className={showCnfPassword ? 'bx bx-lock-open' : 'bx bx-lock'}></i>
+                                    </span>
+                                    <input
+                                        type={showCnfPassword ? "text" : "password"} 
+                                        value={cnfPassword}
+                                        onChange={(e) => setCnfPassword(e.target.value)}/>
                                     <label>Confirm Password</label>
-                                    {errors.cnfPassword && (<span className="error" style={{color:"red"}}>{errors.cnfPassword}</span>)}
+                                    {errors.cnfPassword && <span className="error" style={{ color: "red" }}>{errors.cnfPassword}</span>}
                                 </div>
 
                                 <div className="remember-forgot">

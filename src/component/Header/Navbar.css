@@ -6,25 +6,26 @@
 }
 
 .body{
-    background: url(../images/image.jpg)no-repeat;
-    height: 200px;
+    /* background: url(../images/image.jpg)no-repeat; */
+    /* height: 200px; */
     /* background-size: cover;
     background-position: center; */
     /* height: 100vh; */
 
 }
-/* .parent{
-    position: relative;
-} */
+.parent{
+    width: 100vw;
+    /* position: sticky; */
+}
 
 header{
     top : 0;
-    width: 100%;
+    width: 100vw;
     height: 70px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: sticky;
+    /* position: sticky; */
     z-index: 1000;
     box-shadow: 0 0 10px #000;
     background: rgba(0, 0, 0, 0.5);

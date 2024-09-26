@@ -1,20 +1,14 @@
 import axios from "axios";
 
 class TableService {
-    static getUserData(url) {
-        return axios.get(url);
+    static async getUserData(url) {
+        try {
+            const response = await axios.get(url);
+            return response.data; 
+        } catch (error) {
+            throw error; 
+        }
     }
 }
 
 export default TableService;
-
-
-
-
-
-// export const fetchTableData = async (url)=>{
-//     const response = await axios.get(url);
-//     console.log("table data response---->", response)
-//     return response.data;
-    
-// };

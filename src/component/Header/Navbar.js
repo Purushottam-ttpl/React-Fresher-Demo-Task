@@ -47,26 +47,11 @@ const Navbar =()=>{
         <div className="search-box">
         <form action="">
             <input type="text" name="search" id="srch" placeholder="search" />
-            <button type="submit"><i className="fa fa-search"></i></button> 
+            <button type="button"><i className="fa fa-search"></i></button> 
         </form>
         </div>
         <ul>
-        {/* {userRole === 'Admin' ? (
-            <li>
-                 <Link to="/contact" className="Link">Contact</Link>
-                 <Link to="/sidebar" className="Link">Sidebar</Link>
-            </li>
-            ) : userRole === 'Patient' ? (
-                <li>
-                <Link to="/about" className="Link">About</Link>
-               </li>
-            ) : userRole &&(
-                <li>
-                <Link to="/home" className="Link">Home</Link>
-               </li>
-        )} */}
-
-        
+       
          <li>
          {userRole === "Admin" && (
                 <>
