@@ -137,7 +137,7 @@ function LogSign(){
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}/>
                                     <label>Password</label>
-                                    {errors.password && <span className="error" style={{ color: "red" }}>{errors.password}</span>}
+                                    {errors.password && <span className="error" style={{ color: "red"}}>{errors.password}</span>}
                                 </div>
 
                                 <div className="remember-forgot">
